@@ -12,9 +12,11 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-native-date-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
+import SwitchComponent from '../component/switchComponent';
+
 
 const Data = [
   {
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 12,
     borderRadius: 20,
-    position:'relative'
+    position: 'relative'
   },
   time: {
     fontSize: 33,
@@ -119,45 +121,45 @@ const styles = StyleSheet.create({
   },
 });
 export default function Alarm() {
-  const [isEnabled, setIsEnabled] = useState(false);
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const [date, setDate] = useState(new Date());
   const [text, onChangeText] = React.useState('');
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const handleDatePicker = () => {
     setModalVisible(true);
   };
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <View style={styles.timeBox}>
         <View>
-          <View style={{flexDirection: 'row', alignItems: 'baseline'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
             <Text style={styles.time}>{item.time}</Text>
-            <Text style={{paddingLeft: 2, color: 'grey'}}>{item.status}</Text>
+            <Text style={{ paddingLeft: 2, color: 'grey' }}>{item.status}</Text>
           </View>
           <Text style={styles.timeSubtitle}>{item.subTitle}</Text>
         </View>
-        <Switch
+        {/* <Switch
           trackColor={{false: '#767577', true: '#03CF54'}}
           thumbColor={isEnabled ? '#fff' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={isEnabled}
           style={{transform: [{scaleX: 0.8}, {scaleY: 0.8}]}}
-        />
+        /> */}
+        <SwitchComponent />
       </View>
     );
   };
 
   return (
-    <SafeAreaView style={{backgroundColor: '#F5F5F5', flex: 1}}>
-      <View style={{paddingHorizontal: 22, flex: 1}}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+    <SafeAreaView style={{ backgroundColor: '#F5F5F5', flex: 1 }}>
+      <View style={{ paddingHorizontal: 22, flex: 1 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <View>
-            <Text style={{fontSize: 35, fontWeight: '500'}}>Alarm</Text>
-            <Text style={{color: 'grey'}}>All alarms turned off</Text>
+            <Text style={{ fontSize: 35, fontWeight: '500' }}>Alarm</Text>
+            <Text style={{ color: 'grey' }}>All alarms turned off</Text>
           </View>
           <View
             style={{
@@ -168,7 +170,7 @@ export default function Alarm() {
             }}>
             <Icon
               name="ellipsis-vertical"
-              style={{paddingHorizontal: 6, paddingVertical: 5}}
+              style={{ paddingHorizontal: 6, paddingVertical: 5 }}
               size={20}
             />
           </View>
@@ -179,7 +181,7 @@ export default function Alarm() {
             renderItem={renderItem}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingBottom: 100, marginTop: 20}}
+            contentContainerStyle={{ paddingBottom: 100, marginTop: 20 }}
           />
         </View>
 
@@ -248,19 +250,19 @@ export default function Alarm() {
                     onChangeText={onChangeText}
                   />
                 </View>
-                <View style={{flexDirection: 'row', marginVertical: 20}}>
+                <View style={{ flexDirection: 'row', marginVertical: 20 }}>
                   <Pressable
                     style={[
                       styles.button,
-                      {backgroundColor: '#D9D9D9', marginRight: 20},
+                      { backgroundColor: '#D9D9D9', marginRight: 20 },
                     ]}
                     onPress={() => setModalVisible(!modalVisible)}>
-                    <Text style={[styles.textStyle, {color: 'black'}]}>
+                    <Text style={[styles.textStyle, { color: 'black' }]}>
                       Cancel
                     </Text>
                   </Pressable>
                   <Pressable
-                    style={[styles.button, {backgroundColor: '#212A35'}]}
+                    style={[styles.button, { backgroundColor: '#212A35' }]}
                     onPress={() => setModalVisible(!modalVisible)}>
                     <Text style={styles.textStyle}>Save</Text>
                   </Pressable>
@@ -280,7 +282,7 @@ export default function Alarm() {
           <Pressable
             style={[styles.button, styles.buttonOpen]}
             onPress={() => handleDatePicker()}>
-            <Icon name="add" style={{color: 'white'}} size={35} />
+            <Icon name="add" style={{ color: 'white' }} size={35} />
           </Pressable>
         </View>
       </View>
